@@ -23,16 +23,16 @@ public class EducationMenu {
                 dao.create(new Education(name(sc)));
             }
             case "update" -> {
-                System.out.println("Write the id of the education you want to update and the updated name");
+                System.out.println("Write the ID of the education you want to update and the updated name");
                 getId(sc).setName(name(sc));
                 dao.update(education);
             }
             case "id" -> {
-                System.out.println("to search for specific education just write the id here: ");
+                System.out.println("to search for specific education just write the ID here: ");
                 System.out.println(getId(sc));
             }
             case "delete" -> {
-                System.out.println("Write the id of the education you want to delete");
+                System.out.println("Write the ID of the education you want to delete");
                 getId(sc);
                 dao.delete(education);
             }
@@ -46,7 +46,6 @@ public class EducationMenu {
                 execute();
             }
         }
-
     }
 
     private String name(Scanner sc) {
@@ -57,13 +56,12 @@ public class EducationMenu {
         return education = dao.getById(sc.nextInt());
     }
 
-    private void printMenuOption() {
-        System.out.println("Here you can search, add, remove, update anything related to the education table");
-        System.out.println("Write \"c\" to get all the available commands!");
-    }
+
 
     public void execute() {
-        printMenuOption();
+
+        System.out.println("Here you can search, add, remove, update !");
+        System.out.println("Write \"c\" to get all the available commands!");
         try {
             choice();
         } catch (InputMismatchException e) {

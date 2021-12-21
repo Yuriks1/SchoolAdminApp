@@ -31,20 +31,20 @@ public class StudentMenu {
         command = command.replaceAll("\\s+", "");
         switch (command) {
             case "add" -> {
-                System.out.println("Write the education id then the name of the student you want to add");
+                System.out.println("Write the education ID then the name of the student you want to add");
                 idCheck(sc);
             }
             case "update" -> {
-                System.out.println("Write the student id then the students updated name");
+                System.out.println("Write the student ID then the students updated name");
                 getStudentId(sc).setName(name(sc), name(sc));
                 studentDao.update(student);
             }
             case "id" -> {
-                System.out.println("To search for specific student write the student id here: ");
+                System.out.println("To search for specific student write the student ID here: ");
                 System.out.println(getStudentId(sc));
             }
             case "delete" -> {
-                System.out.println("Write the id of the student you want to delete");
+                System.out.println("Write the ID of the student you want to delete");
                 getStudentId(sc);
                 studentDao.delete(student);
             }
@@ -60,14 +60,13 @@ public class StudentMenu {
             }
 
             case "c" -> {
-                System.out.println("Commands: add, update, id, delete, all");
+                System.out.println("Commands: add, update, id, delete, all,");
                 System.out.println("get by education, update education");
                 choice();
             }
             default -> {
                 System.out.println("Try again, please");
-                execute();
-            }
+                execute();}
         }
     }
 
@@ -87,22 +86,14 @@ public class StudentMenu {
         return student = studentDao.getById(sc.nextInt());
     }
 
-    private Course getCourseId(Scanner sc) {
-        return course = courseDao.getById(sc.nextInt());
-    }
-
     private Education getEducationId(Scanner sc) {
         return education = educationDao.getById(sc.nextInt());
     }
 
-    private void printMenuOption() {
-        System.out.println("Here you can search, add, remove, update anything related to the student table");
-        System.out.println("Write \"c\" to get all the available commands");
-    }
-
     public void execute() {
 
-        printMenuOption();
+        System.out.println("Here you can search, add, remove, update !");
+        System.out.println("Write \"c\" to get all the available commands");
         try {
             choice();
         } catch (InputMismatchException e) {

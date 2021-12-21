@@ -24,31 +24,33 @@ public class CourseMenu {
         command = command.replaceAll("\\s+", "");
         switch (command) {
             case "add" -> {
-                System.out.println("Write the education id then the name of the course you want to add");
+                System.out.println("Write the education ID then the name of the course you want to add");
                 idCheck(sc);
             }
             case "update" -> {
-                System.out.println("Write the id of the course you want to update and then the updated name");
+                System.out.println("Write the ID of the course you want to update and then the updated name");
                 getCourseId(sc).setName(name(sc));
                 courseDao.update(course);
             }
             case "id" -> {
-                System.out.println("to search for specific education just write the id here: ");
+                System.out.println("to search for specific education just write the ID here: ");
                 System.out.println(getCourseId(sc));
             }
             case "delete" -> {
-                System.out.println("Write the id of the course you want to delete");
+                System.out.println("Write the ID of the course you want to delete");
                 getCourseId(sc);
                 courseDao.delete(course);
             }
             case "all" -> courseDao.getAll().forEach(System.out::println);
             case "updateeducation" -> {
-                System.out.println("To edit a course education write student id then the education or null if you want to remove it");
+                System.out.println("To edit a course education write student id then the education or" +
+                        " null if you want to remove it");
                 getCourseId(sc).setEducation(getEducationId(sc));
                 courseDao.update(course);
             }
             case "getbyeducation" -> {
-                System.out.println("to see all courses connected to a specfic education, just write the education id");
+                System.out.println("to see all courses connected to a specfic education," +
+                        " just write the education id");
                 courseDao.getByEducation(sc.nextInt()).forEach(System.out::println);
             }
             case "c" -> {
@@ -57,16 +59,14 @@ public class CourseMenu {
             }
             default -> {
                 System.out.println("Try again");
-                execute();
-            }
+                execute();}
         }
-
     }
 
     private void idCheck(Scanner sc) {
         Education idCheck = getEducationId(sc);
         if (idCheck == null)
-            System.out.println("That id doesn't exist");
+            System.out.println("That ID does not exist");
         else
             courseDao.create(new Course(name(sc)), idCheck);
     }
@@ -83,18 +83,14 @@ public class CourseMenu {
         return course = courseDao.getById(sc.nextInt());
     }
 
-    private void printMenuOption() {
-        System.out.println("Here you can search, add, remove, update anything related to the course table");
-        System.out.println("write \"c\" to get all the available commands");
-    }
-
-
     public void execute() {
-        printMenuOption();
+
+        System.out.println("Here you can search, add, remove, update !");
+        System.out.println("Write \"c\" to see all the available commands");
         try {
             choice();
         } catch (InputMismatchException e) {
-            System.out.println("Wrong input, try again");
+            System.out.println("Wrong input, please try again");
         } catch (RollbackException e) {
             System.out.println("Already exists");
         } catch (IllegalArgumentException | PersistenceException | NullPointerException e) {

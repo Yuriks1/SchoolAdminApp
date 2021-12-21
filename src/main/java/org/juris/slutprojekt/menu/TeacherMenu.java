@@ -30,49 +30,50 @@ public class TeacherMenu {
         command = command.replaceAll("\\s+", "");
         switch (command) {
             case "add" -> {
-                System.out.println("Write the education id then the name of the teacher you want to add");
+                System.out.println("Write the education ID then the name of the teacher you want to add");
                 idCheck(sc);
             }
             case "update" -> {
-                System.out.println("Write the teacher id then the teacher updated name");
+                System.out.println("Write the teacher ID then the teacher updated name");
                 getTeacherId(sc).setName(name(sc), name(sc));
                 teacherDao.update(teacher);
             }
             case "id" -> {
-                System.out.println("To search for specific teacher write the teacher id here: ");
+                System.out.println("To search for specific teacher write the teacher ID here: ");
                 System.out.println(getTeacherId(sc));
             }
             case "delete" -> {
-                System.out.println("Write the id of the teacher you want to delete");
+                System.out.println("Write the ID of the teacher you want to delete");
                 getTeacherId(sc);
                 teacherDao.delete(teacher);
             }
             case "updateeducation" -> {
-                System.out.println("To change a teachers education, write the teacher id then the education or null if you want to remove it");
+                System.out.println("To change a teachers education, write the teacher ID " +
+                        "" +
+                        "then the education or null if you want to remove it");
                 getTeacherId(sc).setEducation(getEducationId(sc));
                 teacherDao.update(teacher);
             }
 
-
             case "getbyeducation" ->{
-                System.out.println("To see a teacher specific education just write the id of the education");
+                System.out.println("To see a teacher specific education write the ID of the education");
                 teacherDao.getByEducation(sc.nextInt()).forEach(System.out::println);
             }
             case "addtocourse" -> {
-
-                System.out.println("Write the course id then the teacher id please");
+                System.out.println("Write the course ID then the teacher ID please");
                 courseSet.add(getCourseId(sc));
                 teacherDao.setCourse(courseSet, getTeacherId(sc));
             }
             case "deletefromcourse" -> {
-                System.out.println("Please write the id of the course then id of the teacher");
+                System.out.println("Please write the ID of the course then ID of the teacher");
                 teacherDao.deleteFromCourse(sc.nextInt(), sc.nextInt());
             }
 
             case "all" -> teacherDao.getAll().forEach(System.out::println);
 
             case "c" -> {
-                System.out.println("Commands: add, update, id, delete, all, delete from course, add to course, get by education,");
+                System.out.println("Commands: add, update, id, delete, all, delete from course," +
+                        " add to course, get by education,");
                 System.out.println("update education");
                 choice();
             }
@@ -107,13 +108,10 @@ public class TeacherMenu {
         return education = educationDao.getById(sc.nextInt());
     }
 
-    private void printMenuOption() {
-        System.out.println("Here you can search, add, remove, update anything related to the teacher table");
-        System.out.println("write \"c\" to get all the available commands");
-    }
 
     public void execute() {
-        printMenuOption();
+        System.out.println("Here you can search, add, remove, update !");
+        System.out.println("write \"c\" to get all the available commands");
         try {
             choice();
         } catch (InputMismatchException e) {
@@ -121,7 +119,7 @@ public class TeacherMenu {
         } catch (RollbackException e) {
             System.out.println("Already exists");
         } catch (IllegalArgumentException | PersistenceException | NullPointerException | IllegalStateException e) {
-            System.out.println("That id does not exist");
+            System.out.println("That ID does not exist");
         }
     }
 }
